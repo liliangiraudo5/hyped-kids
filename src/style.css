@@ -1,7 +1,22 @@
+@font-face {
+    font-family: MontserratRegular;
+    src: url('/static/fonts/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: MontserratExtraBold;
+    src: url('/static/fonts/Montserrat-ExtraBold.ttf');
+}
+
+@font-face {
+    font-family: MontserratBold;
+    src: url('/static/fonts/Montserrat-Bold.ttf');
+}
+
 html, body {
     background: black;
     color: white;
-    font-family: 'Montserrat', sans-serif;
+    font-family: MontserratExtraBold, sans-serif;
 }
 
 .wrapper {
