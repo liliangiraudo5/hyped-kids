@@ -85,7 +85,7 @@ class Smoke {
 
         textureLoader.load('/textures/clouds.png', texture => {
             const smokeMaterial = new THREE.MeshLambertMaterial({
-                color: 0xffffff,
+                color: 0xCC00FF,
                 map: texture,
                 transparent: true
             });
@@ -93,7 +93,7 @@ class Smoke {
             const smokeGeometry = new THREE.PlaneBufferGeometry(300, 300);
 
             const smokeMeshes = [];
-            let limit = 75;
+            let limit = 65;
 
             while(limit--) {
                 smokeMeshes[limit] = new THREE.Mesh(smokeGeometry, smokeMaterial);
