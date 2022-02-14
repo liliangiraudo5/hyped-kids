@@ -1,0 +1,104 @@
+html, body {
+    background: black;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.wrapper {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 4rem;
+}
+
+.colored {
+    color: #cc00ff;
+}
+
+.linkWrapper{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 1rem;
+}
+
+.comingSoon{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 2rem;
+    font-size: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.icon {
+    height: 2rem;
+    width: 2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.icon img {
+    filter: invert(11%) sepia(92%) saturate(7408%) hue-rotate(283deg) brightness(117%) contrast(117%);
+}
+
+.icon:hover {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: scale(1.2) translate3d(0, 0, 0);
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: scale(1.2) translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        transform: scale(1.2) translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: scale(1.2) translate3d(-2px, 0, 0);
+    }
+    40%, 60% {
+        transform: scale(1.2) translate3d(2px, 0, 0);
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 3rem;
+    }
+
+    .comingSoon{
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .comingSoon{
+        font-size: 1rem;
+    }
+
+    .icon {
+        height: 1.5rem;
+        width: 1.5rem;
+        padding: 0.5rem;
+    }
+
+    .linkWrapper{
+        gap: 1.5rem;
+    }
+}

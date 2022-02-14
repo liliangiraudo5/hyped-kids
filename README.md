@@ -1,1 +1,3 @@
-# Hyped Kids
+# HYPED KIDS
+
+## The Dope Studio
