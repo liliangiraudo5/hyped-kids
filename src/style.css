@@ -107,6 +107,12 @@ html, body {
     .comingSoon{
         font-size: 1rem;
     }
+
+    .icon:hover {
+        animation: none;
+        transform: none;
+        perspective: none;
+    }
 }
 
 @media (max-width: 320px) {
@@ -126,5 +132,11 @@ html, body {
 
     .linkWrapper{
         gap: 1.5rem;
+    }
+
+    .icon:hover {
+        animation: none;
+        transform: none;
+        perspective: none;
     }
 }
