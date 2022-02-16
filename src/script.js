@@ -101,7 +101,7 @@ class Smoke {
             const smokeGeometry = new THREE.PlaneBufferGeometry(300, 300);
 
             const smokeMeshes = [];
-            let limit = 65;
+            let limit = 125;
 
             while(limit--) {
                 smokeMeshes[limit] = new THREE.Mesh(smokeGeometry, smokeMaterial);
