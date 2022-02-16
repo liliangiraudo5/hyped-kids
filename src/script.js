@@ -171,9 +171,10 @@ class Smoke {
         camera.aspect = windowWidth / windowHeight;
         camera.updateProjectionMatrix();
 
-        this.renderer.setSize(windowWidth, windowHeight);
         this.width = windowWidth
         this.height = windowHeight
+        this.renderer.setSize(windowWidth, windowHeight);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     }
 
     addEventListeners() {
