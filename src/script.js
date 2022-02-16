@@ -121,7 +121,7 @@ class Smoke {
                 object.traverse( function ( child ) {
                     if( child.material ) {
                         child.material = new THREE.MeshPhongMaterial( {
-                            color: 0x808080,
+                            color: 0xCC00FF,
                             wireframe: true
                         } );
                     }
