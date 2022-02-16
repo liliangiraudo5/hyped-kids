@@ -126,11 +126,9 @@ class Smoke {
                         } );
                     }
                 });
-                //object.scale.set(2.5, 2.5, 2.5)
+
                 object.scale.set(10, 10, 10)
-                object.position.y = -1800
-                object.position.x = 20
-                object.position.z = 100
+                object.position.set(20, -1800, 100)
 
                 this.scene.add(object)
                 this.modelObject = object;
