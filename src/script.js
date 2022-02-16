@@ -10,6 +10,10 @@ class Smoke {
             height: window.innerHeight
         };
 
+        this.cursor = {
+            x: 0, y: 0
+        }
+
         Object.assign(this, options, defaults);
         this.onResize = this.onResize.bind(this);
 
@@ -59,12 +63,16 @@ class Smoke {
         const deltaTime = elapsedTime - this.previousTime
         this.previousTime = elapsedTime
 
-        let smokeParticlesLength = smokeParticles.length;
+        const parallaxX = this.cursor.x * 30
+        const parallaxY = - this.cursor.y * 30
+        this.cameraGroup.position.x += (parallaxX - this.cameraGroup.position.x) * 5 * deltaTime
+        this.cameraGroup.position.y += (parallaxY - this.cameraGroup.position.y) * 5 * deltaTime
 
         if(typeof this.modelObject === 'object'){
             this.modelObject.rotation.y += deltaTime * 0.2;
         }
 
+        let smokeParticlesLength = smokeParticles.length;
         while(smokeParticlesLength--) {
             smokeParticles[smokeParticlesLength].rotation.z += deltaTime * 0.2;
         }
@@ -80,10 +88,12 @@ class Smoke {
 
     addCamera() {
         const { scene } = this;
+        const cameraGroup = this.cameraGroup = new THREE.Group()
         const camera = this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 1, 10000);
 
         camera.position.z = 1000;
-        scene.add(camera);
+        scene.add(cameraGroup)
+        cameraGroup.add(camera);
     }
 
     addParticles() {
@@ -179,6 +189,11 @@ class Smoke {
 
     addEventListeners() {
         window.addEventListener('resize', this.onResize);
+
+        window.addEventListener('mousemove', (event) => {
+            this.cursor.x = event.clientX / this.width - 0.5
+            this.cursor.y = event.clientY / this.height - 0.5
+        })
     }
 
 }
