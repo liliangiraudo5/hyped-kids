@@ -17,6 +17,7 @@ html, body {
     background: black;
     color: white;
     font-family: MontserratRegular, sans-serif;
+    overflow: hidden;
 }
 
 .webgl
