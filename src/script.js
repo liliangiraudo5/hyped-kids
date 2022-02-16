@@ -1,7 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
-
-/* smoke.js */
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 
 class Smoke {
 
@@ -20,13 +19,14 @@ class Smoke {
         this.addEventListeners();
         this.init();
 
-        console.log("loaded")
+        console.log("Initialized")
     }
 
     init() {
         const { width, height } = this;
 
         this.clock = new THREE.Clock();
+        this.previousTime = 0
 
         const renderer = this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvas,
@@ -50,15 +50,23 @@ class Smoke {
         this.addCamera();
         this.addLights();
         this.addParticles();
+        this.addModel();
     }
 
-    evolveSmoke(delta) {
+    evolveSmokeAndModel() {
         const { smokeParticles } = this;
+        const elapsedTime = this.clock.getElapsedTime()
+        const deltaTime = elapsedTime - this.previousTime
+        this.previousTime = elapsedTime
 
         let smokeParticlesLength = smokeParticles.length;
 
+        if(typeof this.modelObject === 'object'){
+            this.modelObject.rotation.y += deltaTime * 0.2;
+        }
+
         while(smokeParticlesLength--) {
-            smokeParticles[smokeParticlesLength].rotation.z += delta * 0.2;
+            smokeParticles[smokeParticlesLength].rotation.z += deltaTime * 0.2;
         }
     }
 
@@ -105,6 +113,37 @@ class Smoke {
         });
     }
 
+    addModel(){
+        const fbxLoader = new FBXLoader()
+        fbxLoader.load(
+            'models/hypedkids-polygon.fbx',
+            (object) => {
+                object.traverse( function ( child ) {
+                    if( child.material ) {
+                        child.material = new THREE.MeshPhongMaterial( {
+                            color: 0x808080,
+                            wireframe: true
+                        } );
+                    }
+                });
+                //object.scale.set(2.5, 2.5, 2.5)
+                object.scale.set(10, 10, 10)
+                object.position.y = -1800
+                object.position.x = 20
+                object.position.z = 100
+
+                this.scene.add(object)
+                this.modelObject = object;
+            },
+            (xhr) => {
+                console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+            },
+            (error) => {
+                console.log(error)
+            }
+        )
+    }
+
     render() {
         const { mesh } = this;
         let { cubeSineDriver } = this;
@@ -119,7 +158,7 @@ class Smoke {
     }
 
     update() {
-        this.evolveSmoke(this.clock.getDelta());
+        this.evolveSmokeAndModel();
         this.render();
 
         requestAnimationFrame(this.update.bind(this));
