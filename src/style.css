@@ -43,7 +43,7 @@ html, body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    position: absolute;
+    position: relative;
 }
 
 .title {
@@ -80,10 +80,6 @@ html, body {
     padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
-}
-
-.icon img {
-    filter: invert(11%) sepia(92%) saturate(7408%) hue-rotate(283deg) brightness(117%) contrast(117%);
 }
 
 .icon:hover {

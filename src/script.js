@@ -2,6 +2,13 @@ import './style.css'
 import * as THREE from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM ready")
+
+    const smoke = new Smoke();
+    smoke.update();
+})
+
 class Smoke {
 
     constructor() {
@@ -133,13 +140,13 @@ class Smoke {
                 this.scene.add(object)
                 this.modelObject = object;
 
-                console.log("loaded & mounted")
+                console.log("Model loaded & mounted")
             },
             (xhr) => {
-                console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+                console.log('Model : ' + (xhr.loaded / xhr.total) * 100 + '% loaded')
             },
             (error) => {
-                console.log(error)
+                console.log("Model", error)
             }
         )
     }
@@ -152,7 +159,16 @@ class Smoke {
         this.evolveSmokeAndModel();
         this.render();
 
-        requestAnimationFrame(this.update.bind(this));
+        window.requestAnimationFrame(this.update.bind(this));
+    }
+
+    addEventListeners() {
+        window.addEventListener('resize', this.onResize);
+
+        window.addEventListener('mousemove', (event) => {
+            this.cursor.x = event.clientX / this.width - 0.5
+            this.cursor.y = event.clientY / this.height - 0.5
+        })
     }
 
     onResize() {
@@ -170,19 +186,4 @@ class Smoke {
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     }
 
-    addEventListeners() {
-        window.addEventListener('resize', this.onResize);
-
-        window.addEventListener('mousemove', (event) => {
-            this.cursor.x = event.clientX / this.width - 0.5
-            this.cursor.y = event.clientY / this.height - 0.5
-        })
-    }
-
 }
-
-/* app.js */
-
-const smoke = new Smoke();
-
-smoke.update();
