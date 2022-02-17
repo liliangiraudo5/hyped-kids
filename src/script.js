@@ -4,17 +4,15 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 
 class Smoke {
 
-    constructor(options) {
-        const defaults = {
-            width: window.innerWidth,
-            height: window.innerHeight
-        };
-
+    constructor() {
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        this.modelLoaded = false;
         this.cursor = {
-            x: 0, y: 0
+            x: 0,
+            y: 0
         }
 
-        Object.assign(this, options, defaults);
         this.onResize = this.onResize.bind(this);
 
         // Canvas
@@ -42,15 +40,6 @@ class Smoke {
 
         this.scene = new THREE.Scene();
 
-        const meshGeometry = new THREE.BoxGeometry(200, 200, 200);
-        const meshMaterial = new THREE.MeshLambertMaterial({
-            color: 0xaa6666,
-            wireframe: false
-        });
-        this.mesh = new THREE.Mesh(meshGeometry, meshMaterial);
-
-        this.cubeSineDriver = 0;
-
         this.addCamera();
         this.addLights();
         this.addParticles();
@@ -68,7 +57,7 @@ class Smoke {
         this.cameraGroup.position.x += (parallaxX - this.cameraGroup.position.x) * 5 * deltaTime
         this.cameraGroup.position.y += (parallaxY - this.cameraGroup.position.y) * 5 * deltaTime
 
-        if(typeof this.modelObject === 'object'){
+        if(this.modelLoaded && typeof this.modelObject === 'object'){
             this.modelObject.rotation.y += deltaTime * 0.2;
         }
 
@@ -140,8 +129,11 @@ class Smoke {
                 object.scale.set(10, 10, 10)
                 object.position.set(20, -1800, 100)
 
+                this.modelLoaded = true;
                 this.scene.add(object)
                 this.modelObject = object;
+
+                console.log("loaded & mounted")
             },
             (xhr) => {
                 console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
@@ -153,15 +145,6 @@ class Smoke {
     }
 
     render() {
-        const { mesh } = this;
-        let { cubeSineDriver } = this;
-
-        cubeSineDriver += 0.01;
-
-        mesh.rotation.x += 0.005;
-        mesh.rotation.y += 0.01;
-        mesh.position.z = 100 + Math.sin(cubeSineDriver) * 500;
-
         this.renderer.render(this.scene, this.camera);
     }
 
