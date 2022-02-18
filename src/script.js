@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const smoke = new Smoke();
     smoke.update();
+
+    document.querySelector('body').dispatchEvent(new Event('resize'))
 })
 
 class Smoke {
@@ -172,6 +174,7 @@ class Smoke {
     }
 
     onResize() {
+        console.log('Resize Event Triggered')
         const { camera } = this;
 
         const windowWidth  = window.innerWidth;
