@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const smoke = new Smoke();
     smoke.update();
 
-    document.querySelector('body').dispatchEvent(new Event('resize'))
+    setTimeout(function(){
+        document.querySelector('body').dispatchEvent(new Event('resize'))
+    },2000);
 })
 
 class Smoke {
