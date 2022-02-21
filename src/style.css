@@ -20,6 +20,10 @@ html, body {
     overflow: hidden;
 }
 
+body {
+    margin: 0;
+}
+
 .unselectable {
     -webkit-user-select: none;
     -webkit-touch-callout: none;
@@ -64,17 +68,38 @@ html, body {
 }
 
 .comingSoon{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 2rem;
     font-size: 1.5rem;
     display: flex;
     gap: 0.5rem;
     font-family: MontserratExtraBold, sans-serif;
+    padding: 0 2rem;
 }
 
-.icon {
+.footer{
+    position: absolute;
+    bottom: 0;
+    font-size: 1.5rem;
+    font-family: MontserratExtraBold, sans-serif;
+    width: 100%;
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.footer .icon {
+    height: 2rem;
+    width: 2rem;
+    padding: 0 2rem;
+    cursor: pointer;
+}
+
+.footer .icon img {
+    width: 100%;
+}
+
+.linkWrapper .icon {
     height: 2rem;
     width: 2rem;
     padding: 0.5rem;
@@ -111,6 +136,15 @@ html, body {
 
     .comingSoon{
         font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .footer{
+        padding: 1rem 0;
+    }
+
+    .footer .icon {
+        padding: 0 1rem;
     }
 
     .icon:hover {
@@ -125,11 +159,7 @@ html, body {
         font-size: 2rem;
     }
 
-    .comingSoon{
-        font-size: 1rem;
-    }
-
-    .icon {
+    .linkWrapper .icon {
         height: 1.5rem;
         width: 1.5rem;
         padding: 0.5rem;
@@ -137,11 +167,5 @@ html, body {
 
     .linkWrapper{
         gap: 1.5rem;
-    }
-
-    .icon:hover {
-        animation: none;
-        transform: none;
-        perspective: none;
     }
 }
