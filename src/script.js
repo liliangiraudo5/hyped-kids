@@ -28,6 +28,8 @@ class Smoke {
 
         // Canvas
         this.canvas = document.querySelector('canvas.webgl')
+        this.loadingBarElement = document.querySelector('.loadingBar')
+        this.overlayElement = document.querySelector('.overlay')
 
         this.addEventListeners();
         this.init();
@@ -53,6 +55,7 @@ class Smoke {
 
         this.addCamera();
         this.addLights();
+        this.addLoadingManager();
         this.addParticles();
         this.addModel();
     }
@@ -96,9 +99,34 @@ class Smoke {
         cameraGroup.add(camera);
     }
 
+    addLoadingManager(){
+        this.loadingManager = new THREE.LoadingManager(
+            // Loaded
+            () =>
+            {
+                window.setTimeout(() =>
+                {
+                    this.loadingBarElement.classList.add('ended')
+                    this.loadingBarElement.style.transform = ''
+                }, 500)
+
+                window.setTimeout(() =>
+                {
+                    this.overlayElement.classList.add('ended')
+                }, 1700)
+            },
+            // Progress
+            (itemUrl, itemsLoaded, itemsTotal) =>
+            {
+                let progressRatio = itemsLoaded / itemsTotal
+                this.loadingBarElement.style.transform = `scaleX(${progressRatio})`
+            }
+        )
+    }
+
     addParticles() {
         const { scene } = this;
-        const textureLoader = new THREE.TextureLoader();
+        const textureLoader = new THREE.TextureLoader(this.loadingManager);
         this.smokeParticles = [];
 
         textureLoader.load('/textures/clouds.png', texture => {
@@ -124,7 +152,7 @@ class Smoke {
     }
 
     addModel(){
-        const fbxLoader = new FBXLoader()
+        const fbxLoader = new FBXLoader(this.loadingManager)
         fbxLoader.load(
             'models/hypedkids-polygon.fbx',
             (object) => {
