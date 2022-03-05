@@ -58,6 +58,17 @@ module.exports = {
                 ]
             },
 
+            // SCSS
+            {
+                test: /\.scss$/,
+                use:
+                [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
+            },
+
             // Images
             {
                 test: /\.(jpg|png|gif|svg)$/,
