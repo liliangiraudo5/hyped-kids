@@ -1,7 +1,4 @@
 import './style/main.scss'
-import './style/icon.scss'
-import './style/home.scss'
-import './style/footer.scss'
 //import * as THREE from 'three'
 //import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 
