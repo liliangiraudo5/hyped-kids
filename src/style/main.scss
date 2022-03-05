@@ -26,6 +26,20 @@ section {
   height: 100vh;
 }
 
+.webgl
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+.html-wrapper {
+  position: relative;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 #roadmap {
   display: flex;
   flex-direction: row;
@@ -69,7 +83,7 @@ section {
   padding: 1rem;
   cursor: pointer;
   color: $baseColor !important;
-  background: $gray-600;
+  background: $gray-700;
   border-radius: 3px;
   transition: 500ms ease-in-out;
   width: fit-content;
