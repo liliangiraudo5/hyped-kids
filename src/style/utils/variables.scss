@@ -1,0 +1,31 @@
+@font-face {
+  font-family: MontserratRegular;
+  src: url('/static/fonts/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: MontserratExtraBold;
+  src: url('/static/fonts/Montserrat-ExtraBold.ttf');
+}
+
+@font-face {
+  font-family: MontserratBold;
+  src: url('/static/fonts/Montserrat-Bold.ttf');
+}
+
+$baseColor: #F4EEEA;
+$secondaryColor: #cc00ff;
+
+$fontRegular: MontserratRegular, sans-serif;
+$fontBold: MontserratBold, sans-serif;
+$fontExtraBold: MontserratExtraBold, sans-serif;
+
+$gray-darkest: #1c1d23;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #b5b5b8;
+$gray-600: #6c757d;
+$gray-700: #272932;
+$gray-800: #1f2028;

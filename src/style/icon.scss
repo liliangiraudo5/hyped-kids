@@ -1,0 +1,39 @@
+@import "utils/variables";
+
+.social-icon {
+  height: 2rem;
+  width: 2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.icon:hover {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: scale(1.2) translate3d(0, 0, 0);
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: scale(1.2) translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: scale(1.2) translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: scale(1.2) translate3d(-2px, 0, 0);
+  }
+  40%, 60% {
+    transform: scale(1.2) translate3d(2px, 0, 0);
+  }
+}
+
+@media (max-width: 480px) {
+  .icon:hover {
+    animation: none;
+    transform: none;
+    perspective: none;
+  }
+}
