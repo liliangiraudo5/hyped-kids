@@ -1,4 +1,4 @@
-import './style2.scss'
+import './style.scss'
 //import * as THREE from 'three'
 //import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 
