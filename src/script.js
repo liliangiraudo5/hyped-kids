@@ -149,6 +149,7 @@ class App {
 
     onResize() {
         console.log('Resize Event Triggered')
+
         const { camera } = this;
 
         const windowWidth  = window.innerWidth;
