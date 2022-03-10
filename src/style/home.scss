@@ -1,6 +1,9 @@
 @import "utils/variables";
 
 #home {
+  display: flex;
+  flex-direction: column;
+
   .header {
     padding: 2rem;
     display: flex;
@@ -17,4 +20,31 @@
       gap: 1rem;
     }
   }
+
+  .home-content {
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .title {
+      text-transform: uppercase;
+      font-size: 5rem;
+    }
+  }
 }
+
+/*@keyframes do-levitation {
+  0% {
+    transform: translate(0, 0);
+    background-color: red;
+  }
+  100% {
+    transform: translate(-0.5em, -0.5em);
+    background-color: blue;
+  }
+}
+
+.levitate {
+  animation: do-levitation 1.2s alternate ease-in-out infinite;
+}*/
