@@ -1,5 +1,6 @@
 import './style/main.scss'
 import * as THREE from 'three'
+import nftPaths from "../static/nft/path.json" //load image from firebase
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM ready")
@@ -18,10 +19,12 @@ class App {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
         this.scrollY = window.scrollY;
-        this.objectsDistance = 2;
+        this.objectsDistance = 4;
+        this.currentSection = 0; //permet de savoir le numéro de section dans laquelle on se trouve
         this.previousTime = 0
         this.deltaTime = 0
         this.kids = [];
+        this.particles = [];
         this.cursor = {
             x: 0,
             y: 0
@@ -105,6 +108,7 @@ class App {
         // Points
         const particles = new THREE.Points(particlesGeometry, particlesMaterial)
 
+        this.particles.push(particles)
         scene.add(particles);
     }
 
@@ -114,22 +118,23 @@ class App {
     addKids(){
         const { scene } = this;
         const textureLoader = new THREE.TextureLoader();
-        const numberNFT = 2
 
         let kidTextures = [];
 
-        for(let kidId = 1; kidId <= numberNFT; kidId++){
+        for(let url of nftPaths){
             let kidTexture = new Promise((resolve) => {
-
-                let url = `/nft/kid-${kidId}.png`;
-
                 textureLoader.load(url, texture => {
-                        if (texture instanceof THREE.Texture) resolve(texture);
+                    if (texture instanceof THREE.Texture) resolve(texture);
                 });
             })
 
             kidTextures.push(kidTexture)
         }
+
+        /* Le temps d'avoir + de kids */
+        let kidTextures_tmp = [...kidTextures]
+        kidTextures = kidTextures.concat(kidTextures_tmp)
+        kidTextures = kidTextures.concat(kidTextures_tmp)
 
         Promise.all(kidTextures).then(loadedTextures => {
             loadedTextures.forEach(texture => {
@@ -138,11 +143,14 @@ class App {
                 });
                 kidMaterial.map.minFilter = THREE.LinearFilter;
 
-                const kidGeometry = new THREE.PlaneGeometry(0.5, 0.5);
+                const randomShape = this.getRandomFloat(0.3, 0.7, 1)
+                const kidGeometry = new THREE.PlaneGeometry(randomShape, randomShape);
 
-               let kid = new THREE.Mesh(kidGeometry, kidMaterial);
+                let kid = new THREE.Mesh(kidGeometry, kidMaterial);
 
-                kid.position.z = -30; //position de départ
+                kid.position.z = this.getRandomFloat(-0.5, -20, 2)
+                kid.position.x = this.getRandomFloat(-2, 2, 2, -1, 1)
+                kid.position.y = this.getRandomFloat(-2, 2, 2, -1, 1)
 
                 this.kids.push(kid);
                 scene.add(kid)
@@ -170,6 +178,8 @@ class App {
 
         this.animateKids()
 
+        this.updateParticles();
+
         this.render();
 
         // Call update again on the next frame
@@ -186,20 +196,31 @@ class App {
     animateKids(){
         if(this.kids.length > 0) {
             this.kids.forEach((kid, kidId) => {
-                kidId++; //on a un cran de retard vu qu'on commence pas à zéro
-
-                kid.position.z += this.deltaTime * 10;
-
-                if(kidId % 2) {
-                    kid.position.y += this.deltaTime * 0.15;
+                if(this.currentSection > 1) {
+                    kid.visible = false
                 } else {
-                    kid.position.y -= this.deltaTime * 0.15;
-                }
+                    if(!kid.visible){
+                        kid.visible = true;
+                    }
 
-                if(kid.position.z > 5){
-                    kid.position.z = -30;
-                    kid.position.y = 0;
+                    kid.position.z += this.deltaTime * 7;
+                    kid.position.x += this.deltaTime * 0.1 * (kidId % 2 === 0 ? -1 : 1)
+                    kid.position.y += this.deltaTime * 0.1 * (kidId % 2 === 0 ? -1 : 1)
+
+                    if(kid.position.z > 5){
+                        kid.position.z = -10;
+                        kid.position.x = this.getRandomFloat(-2, 2, 2, -1, 1)
+                        kid.position.y = this.getRandomFloat(-2, 2, 2, -1, 1)
+                    }
                 }
+            })
+        }
+    }
+
+    updateParticles(){
+        if(this.particles.length > 0){
+            this.particles.forEach(particle => {
+                particle.visible = this.currentSection >= 1;
             })
         }
     }
@@ -212,6 +233,8 @@ class App {
 
         window.addEventListener('scroll', () => {
             this.scrollY = window.scrollY
+
+            this.currentSection = this.round(this.scrollY / this.height, 2)
         })
 
         window.addEventListener('resize', () => {
@@ -231,5 +254,39 @@ class App {
             this.renderer.setSize(windowWidth, windowHeight);
             this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         });
+    }
+
+    /**
+     * Permet d'arrondir un nombre à n'importe quelle décimale
+     * @param number
+     * @param decimals
+     * @returns {number}
+     */
+    round(number, decimals = 0) {
+        const tenFactor = Math.pow(10, decimals);
+        return Math.round(number * tenFactor) / tenFactor;
+    }
+
+    /**
+     * Génère un nombre aléatoire dans un range précis
+     * @param min
+     * @param max
+     * @param decimals
+     * @param minExclude
+     * @param maxExclude
+     * @returns {number}
+     */
+    getRandomFloat(min = 0, max = 10, decimals = 0, minExclude, maxExclude){
+        const str = (Math.random() * (max - min) + min).toFixed(decimals);
+
+        let random = parseFloat(str);
+
+        if(minExclude && maxExclude) {
+            if(minExclude < random && random < maxExclude ){
+                this.getRandomFloat(min, max, decimals, minExclude, maxExclude)
+            }
+        }
+
+        return random;
     }
 }
