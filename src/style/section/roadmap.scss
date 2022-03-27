@@ -1,0 +1,64 @@
+@import "../utils/variables";
+
+#roadmap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .wrapper {
+    width: 100%;
+    padding: 2rem;
+    height: fit-content;
+  }
+
+  .wrapper.main {
+    width: 80%;
+  }
+}
+
+#roadmap-element {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .stack {
+    font-size: 1.1rem;
+  };
+}
+
+.section-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-radius: 5px;
+  .title {
+    font-size: 2.5rem;
+  }
+}
+
+.content {
+  text-align: justify;
+  line-height: 1.5;
+  font-size: 1rem;
+  color: $baseColor;
+  span {
+    color: $baseColor;
+  }
+}
+
+/*@keyframes do-levitation {
+  0% {
+    transform: translate(0, 0);
+    background-color: red;
+  }
+  100% {
+    transform: translate(-0.5em, -0.5em);
+    background-color: blue;
+  }
+}
+
+.levitate {
+  animation: do-levitation 1.2s alternate ease-in-out infinite;
+}*/

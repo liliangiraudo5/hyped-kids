@@ -1,0 +1,23 @@
+@import "../utils/variables";
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-discord {
+  padding: 1rem;
+  cursor: pointer;
+  color: $baseColor !important;
+  background: $gray-700;
+  border-radius: 3px;
+  transition: 500ms ease-in-out;
+  width: fit-content;
+  &:hover {
+    box-shadow: 15px 5px 0 $secondaryColor, -15px -5px 0 $secondaryColor;
+    background: $gray-darkest;
+  }
+  &:focus {
+    outline: none;
+  }
+}

@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import nftPaths from "../static/nft/path.json" //load image from firebase
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM ready")
+    console.log("[DOM] - Ready")
 
     const app = new App();
     app.update();
@@ -38,8 +38,6 @@ class App {
 
         this.addEventListeners();
         this.init();
-
-        console.log("Initialized")
     }
 
     init() {
@@ -119,6 +117,8 @@ class App {
         const { scene } = this;
         const textureLoader = new THREE.TextureLoader();
 
+        console.log('[THREE] - Start adding kids')
+
         let kidTextures = [];
 
         for(let url of nftPaths){
@@ -137,6 +137,8 @@ class App {
         kidTextures = kidTextures.concat(kidTextures_tmp)
 
         Promise.all(kidTextures).then(loadedTextures => {
+            console.log("[THREE] - Kids loaded")
+
             loadedTextures.forEach(texture => {
                 const kidMaterial = new THREE.MeshBasicMaterial({
                     map: texture,
@@ -155,6 +157,8 @@ class App {
                 this.kids.push(kid);
                 scene.add(kid)
             })
+
+            console.log("[THREE] - Kids added to scene")
         })
     }
 
@@ -239,7 +243,7 @@ class App {
 
         window.addEventListener('resize', () => {
 
-            console.log("Event resize triggered")
+            console.log("[Event] - Resize triggered")
 
             const { camera } = this;
 

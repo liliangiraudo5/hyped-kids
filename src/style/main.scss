@@ -1,6 +1,9 @@
 @import "utils/variables";
 @import "icon";
-@import "home";
+@import "components/button";
+@import "components/glitch";
+@import "section/home";
+@import "section/roadmap";
 @import "footer";
 
 html, body {
@@ -23,7 +26,7 @@ html, body {
 }
 
 section {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .webgl
@@ -38,62 +41,6 @@ section {
   position: relative;
   width: 100vw;
   overflow-x: hidden;
-}
-
-#roadmap {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  .wrapper {
-    width: 85%;
-    padding: 2rem;
-    height: fit-content;
-  }
-}
-
-.section-text-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  background-color: $gray-800;
-  padding: 2rem;
-  border-radius: 5px;
-  .title {
-    font-size: 2.5rem;
-  }
-}
-
-.content {
-  text-align: justify;
-  line-height: 1.5;
-  font-size: 1rem;
-  color: $baseColor;
-  span {
-    color: $baseColor;
-  }
-}
-
-.button-wrapper {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.button-discord {
-  padding: 1rem;
-  cursor: pointer;
-  color: $baseColor !important;
-  background: $gray-700;
-  border-radius: 3px;
-  transition: 500ms ease-in-out;
-  width: fit-content;
-  &:hover {
-    box-shadow: 15px 5px 0 $secondaryColor, -15px -5px 0 $secondaryColor;
-    background: $gray-darkest;
-  }
-  &:focus {
-    outline: none;
-  }
 }
 
 #separator {
