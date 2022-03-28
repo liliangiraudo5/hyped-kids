@@ -159,6 +159,10 @@ class App {
                 kid.position.x = this.getRandomFloat(-2, 2, 2, -1, 1)
                 kid.position.y = this.getRandomFloat(-2, 2, 2, -1, 1)
 
+                kid.userData= {
+                    random: this.getRandomFloat(-2, 2, 2, -1, 1)
+                }
+
                 this.kids.push(kid);
                 scene.add(kid)
             })
@@ -179,6 +183,7 @@ class App {
         const elapsedTime = this.clock.getElapsedTime()
         this.deltaTime = elapsedTime - this.previousTime
         this.previousTime = elapsedTime
+        this.elapsedTime = elapsedTime
 
         //change camera on scroll
         this.camera.position.y = (- this.scrollY / this.height) * this.objectsDistance
@@ -214,9 +219,18 @@ class App {
                         kid.visible = true;
                     }
 
-                    kid.position.z += this.deltaTime * 7;
+                    kid.position.z += this.deltaTime * 6;
+
                     kid.position.x += this.deltaTime * 0.1 * (kidId % 2 === 0 ? -1 : 1)
                     kid.position.y += this.deltaTime * 0.1 * (kidId % 2 === 0 ? -1 : 1)
+
+                    /*
+                    let positionX = Math.cos(this.elapsedTime * kid.userData.random * 0.5) * kid.userData.random
+                    let positionY = Math.sin(this.elapsedTime * kid.userData.random * 0.5) * kid.userData.random
+
+                    kid.position.x = positionX
+                    kid.position.y = positionY
+                    */
 
                     if(kid.position.z > 5){
                         kid.position.z = -10;
