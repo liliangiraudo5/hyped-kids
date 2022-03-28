@@ -6,6 +6,16 @@
 @import "section/roadmap";
 @import "footer";
 
+/*
+  Medias Queries :
+
+  320px - 480px: Mobile devices
+  481px - 768px: iPads, Tablets
+  769px - 1024px: Small screens, laptops
+  1025px - 1200px: Desktops, large screens
+  1201px and more - Extra large screens, TV
+*/
+
 html, body {
   background: $gray-darkest;
   color: $baseColor;
@@ -25,8 +35,13 @@ html, body {
   color: $secondaryColor !important;
 }
 
+.no-scroll{
+  overflow: hidden;
+}
+
 section {
   min-height: 100vh;
+  position: relative;
 }
 
 .webgl
@@ -35,6 +50,33 @@ section {
   top: 0;
   left: 0;
   outline: none;
+}
+
+#loader-wrapper {
+  background-color: $gray-darkest;
+  z-index: 1;
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+
+  &.hide {
+    animation: hideMe 1s forwards;
+  }
+
+  @keyframes hideMe{
+    0%{
+      opacity: 1;
+    }
+    100%{
+      opacity: 0;
+    }
+  }
 }
 
 .html-wrapper {

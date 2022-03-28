@@ -168,6 +168,8 @@ class App {
             })
 
             console.log("[THREE] - Kids added to scene")
+
+            this.hideLoader()
         })
     }
 
@@ -279,6 +281,11 @@ class App {
             this.renderer.setSize(windowWidth, windowHeight);
             this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         });
+    }
+
+    hideLoader(){
+        document.querySelector('#loader-wrapper').classList.add('hide')
+        document.querySelector('body').classList.remove('no-scroll')
     }
 
     /**

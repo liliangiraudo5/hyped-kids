@@ -31,7 +31,7 @@
 .section-text-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2.5rem;
   padding: 2rem;
   border-radius: 5px;
   .title {
@@ -46,6 +46,69 @@
   color: $baseColor;
   span {
     color: $baseColor;
+  }
+}
+
+@media (max-width: 480px) {
+  #roadmap {
+    .wrapper {
+      padding: 1rem;
+      width: 100% !important;
+    }
+
+    .section-text-wrapper {
+      gap: 1.8rem;
+
+      .title {
+        font-size: 1.7rem;
+      }
+
+      .content {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  #roadmap-element {
+    .stack {
+      font-size: 0.9rem;
+    };
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  #roadmap {
+    .section-text-wrapper {
+      gap: 2rem;
+      padding: 0;
+
+      .title {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  #roadmap {
+    .section-text-wrapper {
+      gap: 3rem;
+      padding: 0;
+
+      .title {
+        font-size: 3.5rem;
+      }
+
+      .content {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  #roadmap-element {
+    .stack {
+      font-size: 2rem;
+    };
   }
 }
 

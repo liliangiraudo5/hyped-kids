@@ -34,3 +34,23 @@
     }
   }
 }
+
+@media (max-width: 480px) {
+  #home {
+    .home-content {
+      .title {
+        font-size: 3rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  #home {
+    .home-content {
+      .title {
+        font-size: 4rem;
+      }
+    }
+  }
+}

@@ -31,9 +31,21 @@
 }
 
 @media (max-width: 480px) {
+  .social-icon{
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
   .icon:hover {
     animation: none;
     transform: none;
     perspective: none;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .social-icon{
+    height: 2.5rem;
+    width: 2.5rem;
   }
 }
