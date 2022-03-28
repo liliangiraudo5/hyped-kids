@@ -53,10 +53,15 @@ class App {
 
         this.scene = new THREE.Scene();
 
+        this.addFogEffect();
         this.addCamera();
         this.addLights();
         this.addParticles();
         this.addKids()
+    }
+
+    addFogEffect(){
+        this.scene.fog = new THREE.Fog(0x1C1D23, 1, 15)
     }
 
     addLights() {
@@ -201,7 +206,9 @@ class App {
         if(this.kids.length > 0) {
             this.kids.forEach((kid, kidId) => {
                 if(this.currentSection > 1) {
-                    kid.visible = false
+                   if(kid.visible){
+                       kid.visible = false
+                   }
                 } else {
                     if(!kid.visible){
                         kid.visible = true;
